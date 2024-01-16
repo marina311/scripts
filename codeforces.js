@@ -86,7 +86,8 @@ const dict = {'@danchik77778': 'Яковлев Даниил',
  'standoff_player': 'Воропаев Арсений',
  'timmmm': 'Ильин Тимофей',
  'tsiganovartyom': 'Цыганов Артем',
- 'yershovdmitriy': 'Ершов Дмитрий'};
+ 'yershovdmitriy': 'Ершов Дмитрий',
+  'selleproyt':	'Артур Соколов'};
 
 // Rename users
 document.querySelectorAll('.rated-user').forEach(a => {

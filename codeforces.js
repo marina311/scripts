@@ -87,7 +87,15 @@ const dict = {'@danchik77778': 'Яковлев Даниил',
  'timmmm': 'Ильин Тимофей',
  'tsiganovartyom': 'Цыганов Артем',
  'yershovdmitriy': 'Ершов Дмитрий',
-  'selleproyt':	'Артур Соколов'};
+  'selleproyt':	'Артур Соколов',
+  'Konobeitsev_Ivan':	'Конобейцев Иван',
+'SleepingCat':	'Колоколов Александр',
+'silent1um':	'Паховский Иван',
+'Mr.Kykarek':	'Чванов Федор',
+'dimasik06':	'Хасанов Дмитрий',
+'Elisey_':	'Кочнев Елисей',
+'TROFI':	'Устьянцев Трофим',
+'Artem_Belyakov':	'Беляков Артем'};
 
 // Rename users
 document.querySelectorAll('.rated-user').forEach(a => {

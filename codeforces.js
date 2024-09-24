@@ -98,7 +98,22 @@ const dict = {'@danchik77778': 'Яковлев Даниил',
 'Artem_Belyakov':	'Беляков Артем',
 'vdv09': 'Бугрышев Михаил',
 'Fedorshebanin':'Шебанин Федор',
-'zhiganov_v':'Жиганов Владислав'};
+'zhiganov_v':'Жиганов Владислав',
+'amlet00':'Окулов Никита',
+'Gosha111':'Водяный Георгий',
+'ivan_ovs':'Овсянников Иван',
+'Ivan_qwertyu':'Микрюков Иван',
+'kanev':'Канев Иван',
+'kefip':'Дымшаков Константин',
+'korobeynikov.p.i':'Коробейников Павел',
+'MariaHuanovna':'Можегоров Андрей',
+'mslava':'Мартынов Вячеслав',
+'nikitasplace':'Богданов Никита',
+'theWeird0':'Бурыкина Ксения',
+'VanyaM1':'Мельников Иван',
+'viuver':'Романов Владислав',
+'ZalenoToTo':'Селезнёв Александр'
+};
 
 // Rename users
 document.querySelectorAll('.rated-user').forEach(a => {

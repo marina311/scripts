@@ -129,8 +129,12 @@ const dict = {'@danchik77778': 'Яковлев Даниил',
  'nastyagrebneva':'Гребнева Анастасия 10Н',
  'DankeMart':'Мартиросов Даниил 9Е',
  'chelovek583':'Мамонова Полина 9Е',
-
-              
+ 'artem_galimulin':'Галимулин Артем 11В',
+ 'slavik-mozhet':'Насыров Савва 9Е',
+ 'Stepanal':'Бобыкин Степан 8В',
+ 'ZMEME2009':'Баталов Михаил 9Е',
+ 'Reveek':'Сочнев Даниил 9Е',
+ 'gnominokentiy':'Стафеев Федор 11В',              
 };
 
 // Rename users

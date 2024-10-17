@@ -142,6 +142,7 @@ const dict = {'@danchik77778': 'Яковлев Даниил',
               'mikantrop':'Антропов Михаил 9Е', 
               'n30c0rtoxes':'Гусев Александр 9Е',
               'Yutkin_A':'Юткин Александр 9Е',
+              'ArseniyLeontev':'Леонтьев Арсений 9Е',
 };
 
 // Rename users

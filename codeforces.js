@@ -143,5 +143,5 @@ const aElements = document.querySelectorAll('.change-participant-type-link').for
 });
 
   // лечим тормоза
-  document.querySelectorAll('img[src*="codeforces.org"],script[src*="codeforces.org"]')
+  document.querySelectorAll('img[src*="codeforces.org"],script[src*="codeforces.org"],link[href*="codeforces.org"],meta[content*="codeforces.org"]')
   .forEach(el => el.src = el.src.replace('codeforces.org', 'codeforces.com/codeforces.org'));

@@ -143,4 +143,4 @@ const aElements = document.querySelectorAll('.change-participant-type-link').for
 });
 
   // лечим тормоза
-  document.body.innerHTML = document.body.innerHTML.replaceAll('codeforces.org', 'codeforces.com/codeforces.org');
+  document.body.innerHTML = document.body.innerHTML.replaceAll('//codeforces.org', '//codeforces.com/codeforces.org');

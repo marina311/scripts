@@ -140,4 +140,8 @@ document.querySelectorAll('.standings-flag').forEach(a => {
 // Hide to-practice
 const aElements = document.querySelectorAll('.change-participant-type-link').forEach(a => {
   a.remove()
+
+  // лечим тормоза
+  document.body.innerHTML = document.body.innerHTML.replaceAll('codeforces.org', 'codeforces.com/codeforces.org');
+
 });

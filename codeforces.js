@@ -138,7 +138,11 @@ const dict = {'Sr_lucky_MaN':'Дунин Дмитрий 10В',
 'Diana_Shneider':'Шнейдер Диана 9Е',
 'nas_tyyy':'Лукьянова Анастасия 9Е',
 'Mr.Root.':'Быкова Светлана 10С',
-'ivanporotov':'Поротов Иван 9Е'
+'ivanporotov':'Поротов Иван 9Е',
+              'Remargoo':'Наумович Кирилл',
+              'YUPIYO':'Шаранков Михаил',
+              'chamberzsut':'Леонов Алексей',
+              'Slend32':'Романов Савелий',
 };
 
 // Rename users

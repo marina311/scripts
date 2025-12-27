@@ -147,7 +147,8 @@ const dict = {'Sr_lucky_MaN':'Дунин Дмитрий 10В',
               'timofey_sav':'Савицкий Тимофей',
               'HollowVlad':'Зайцев Владислав',
               'fo_patria':'fo_patria',
-              'Potom':'Белокуров Тимофей'
+              'Potom':'Белокуров Тимофей',
+              'K0JI6G1-1GB_JIew':'Колбенев Лев'
               
 };
 

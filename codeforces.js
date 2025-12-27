@@ -143,6 +143,11 @@ const dict = {'Sr_lucky_MaN':'Дунин Дмитрий 10В',
               'YUPIYO':'Шаранков Михаил',
               'chamberzsut':'Леонов Алексей',
               'Slend32':'Романов Савелий',
+              'timofey_sav':'Савицкий Тимофей',
+              'HollowVlad':'Зайцев Владислав',
+              'fo_patria':'fo_patria',
+              'Potom':'Белокуров Тимофей'
+              
 };
 
 // Rename users

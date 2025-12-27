@@ -148,7 +148,8 @@ const dict = {'Sr_lucky_MaN':'Дунин Дмитрий 10В',
               'HollowVlad':'Зайцев Владислав',
               'fo_patria':'fo_patria',
               'Potom':'Белокуров Тимофей',
-              'K0JI6G1-1GB_JIew':'Колбенев Лев'
+              'K0JI6G1-1GB_JIew':'Колбенев Лев',
+              'Vsevolodia':'Каратаев Всеволод'
               
 };
 

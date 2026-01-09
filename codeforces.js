@@ -150,9 +150,7 @@ const dict = {'Sr_lucky_MaN':'Дунин Дмитрий 10В',
 'nastiicZ':'Золотарева Анастасия',
 'Arsenyi123':'Рабовлюк Арсений 11Н',
 'Jenia1100':'Криченов Евгений',
-'petr_qwerty':'Воронов Петр'
-
-
+'petr_qwerty':'Воронов Петр',
               'Remargoo':'Наумович Кирилл',
               '<span class="legendary-user-first-letter">R</span>emargoo':'Наумович Кирилл',
               'YUPIYO':'Шаранков Михаил',

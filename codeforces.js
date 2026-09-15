@@ -1,10 +1,20 @@
-try {
-  document.querySelector('.standings tbody tr th:nth-of-type(2)').style.width='200px';
-} catch (error) {
-  console.error(error);
-}
+(function () {
+  'use strict';
 
-const dict = {
+  /*
+   * ВСТАВЬТЕ СЮДА ВАШ СЛОВАРЬ.
+   *
+   * Пример:
+   *
+   * const dict = {
+   *   'login_1': 'Иванов Иван 11А',
+   *   'login_2': 'Петрова Анна 10Б'
+   * };
+   */
+
+  /* ВСТАВЬТЕ СЮДА СЛОВАРЬ dict */
+
+  const dict = {
 'Sr_lucky_MaN':'Дунин Дмитрий 11В',
 'Ivanov_Slava':'Иванов Вячеслав 11В',
 'MillerEA':'Миллер Евгений 11В',
@@ -29,8 +39,8 @@ const dict = {
 'IlonMask':'Соснин Илья 11Е',
 'Reveek':'Сочнев Даниил 11Е',
 'Yutkin_A':'Юткин Александр 11Е',
-'vovchan':'Куриннов Владимир  11Н',
-'grmmmely':'Гурьев Роман  11Н',
+'vovchan':'Куриннов Владимир 11Н',
+'grmmmely':'Гурьев Роман 11Н',
 'Vsevolod_progr':'Кондрашин Всеволод 11Н',
 'Amogus2.':'Магазов Артур 11Н',
 '7hhhh':'Найдёнов Ярослав 11Н',
@@ -117,24 +127,103 @@ const dict = {
 'rgvlad':'Рогожников Владислав 10Н',
 'snz_andreev10':'Андреев Иван 10Н',
 'vbnz_miteo':'Сахарлинский Дмитрий 11И',
-};
+    };
 
-// Rename users
-document.querySelectorAll('.rated-user').forEach(a => {
-  const key = a.innerHTML.trim();
-  if (key in dict) {
-    a.innerHTML = dict[key];
+  function applyStandingsChanges() {
+    const table = document.querySelector('.standings');
+
+    /*
+     * Таблица ещё не нарисована React-приложением.
+     * Возвращаем false, чтобы наблюдатель/таймер попробовал позднее.
+     */
+    if (!table) {
+      return false;
+    }
+
+    /*
+     * Устанавливаем ширину второго заголовка.
+     * Поддерживаются варианты, когда заголовки находятся в thead
+     * или почему-то в tbody.
+     */
+    const secondHeader = table.querySelector(
+      'thead tr th:nth-of-type(2), tbody tr th:nth-of-type(2)'
+    );
+
+    if (secondHeader) {
+      secondHeader.style.setProperty('width', '200px', 'important');
+      secondHeader.style.setProperty('min-width', '200px', 'important');
+    }
+
+    /*
+     * Заменяем логины на ФИО.
+     *
+     * textContent, а не innerHTML:
+     * - не ломает вложенную разметку;
+     * - не пытается интерпретировать ФИО как HTML;
+     * - корректнее получает текст логина.
+     */
+    table.querySelectorAll('.rated-user').forEach(element => {
+      const login = element.textContent.trim();
+
+      if (Object.prototype.hasOwnProperty.call(dict, login)) {
+        element.textContent = dict[login];
+      }
+    });
+
+    // Убираем флаги участников.
+    table.querySelectorAll('.standings-flag').forEach(element => {
+      element.remove();
+    });
+
+    // Убираем ссылки изменения типа участника («to practice» и т. п.).
+    document.querySelectorAll('.change-participant-type-link').forEach(element => {
+      element.remove();
+    });
+
+    return true;
   }
-});
 
-// Hide flag
-document.querySelectorAll('.standings-flag').forEach(a => {
-  a.remove();
-});
+  let scheduled = false;
 
-// Hide to-practice
-const aElements = document.querySelectorAll('.change-participant-type-link').forEach(a => {
-  a.remove()
-});
+  function scheduleApply() {
+    if (scheduled) return;
 
+    scheduled = true;
 
+    setTimeout(() => {
+      scheduled = false;
+      applyStandingsChanges();
+    }, 100);
+  }
+
+  function start() {
+    console.log('[Standings helper] Скрипт загружен:', location.href);
+
+    // Первая попытка сразу.
+    applyStandingsChanges();
+
+    /*
+     * LMS — SPA/React-приложение: таблица или отдельные её строки
+     * могут появиться уже после загрузки документа.
+     */
+    const observer = new MutationObserver(() => {
+      scheduleApply();
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true
+    });
+
+    // Несколько дополнительных попыток на случай поздней загрузки данных.
+    setTimeout(applyStandingsChanges, 300);
+    setTimeout(applyStandingsChanges, 1000);
+    setTimeout(applyStandingsChanges, 2500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+})();

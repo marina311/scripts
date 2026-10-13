@@ -123,6 +123,15 @@
 'iotik96':'Безденежных Максим 9Е',
 'wingo80':'Судариков Иван 9Е',
 'SEREGAP_':'Присягин Сергей 9Е',
+ 'Sorokin_Stepan':'Сорокин Степан 10Н',
+'FedoraUsp':'Успеньева Алина 10Н',
+'hjkk':'Мещеряков Иван 9Г',
+'ghjl':'Мясников Артём 10Н',
+'Savely_Meshcheryakov':'Мещеряков Савелий 8Е',
+'sapojnikova.kristi@gmail.com
+':'Сапожникова Кристина 10Н',
+'Mikhey':'Еремеев Михаил 8Е',
+'ikragame':'Парфенов Макар 9Г',   
     };
 
   function applyStandingsChanges() {

@@ -132,58 +132,75 @@
 'ikragame':'Парфенов Макар 9Г',   
     };
 
-  function applyStandingsChanges() {
-    const table = document.querySelector('.standings');
+  const hasOwn = (key) =>
+    Object.prototype.hasOwnProperty.call(dict, key);
 
-    /*
-     * Таблица ещё не нарисована React-приложением.
-     * Возвращаем false, чтобы наблюдатель/таймер попробовал позднее.
-     */
-    if (!table) {
-      return false;
+  function getLogin(element) {
+    // Ник из адреса профиля не меняется после замены текста ссылки.
+    const href = element.getAttribute('href') || '';
+    const match = href.match(/\/profile\/([^/?#]+)/);
+
+    if (match) {
+      try {
+        return decodeURIComponent(match[1]);
+      } catch {
+        return match[1];
+      }
     }
 
+    // Запасной вариант для элементов без ссылки на профиль.
+    return element.dataset.originalLogin || element.textContent.trim();
+  }
+
+  function applyChanges() {
     /*
-     * Устанавливаем ширину второго заголовка.
-     * Поддерживаются варианты, когда заголовки находятся в thead
-     * или почему-то в tbody.
+     * Заменяем ники на всей странице:
+     * и в результатах, и в списке участников.
      */
-    const secondHeader = table.querySelector(
-      'thead tr th:nth-of-type(2), tbody tr th:nth-of-type(2)'
-    );
+    document.querySelectorAll('.rated-user').forEach(element => {
+      const login = getLogin(element);
 
-    if (secondHeader) {
-      secondHeader.style.setProperty('width', '200px', 'important');
-      secondHeader.style.setProperty('min-width', '200px', 'important');
-    }
+      if (!hasOwn(login)) {
+        return;
+      }
 
-    /*
-     * Заменяем логины на ФИО.
-     *
-     * textContent, а не innerHTML:
-     * - не ломает вложенную разметку;
-     * - не пытается интерпретировать ФИО как HTML;
-     * - корректнее получает текст логина.
-     */
-    table.querySelectorAll('.rated-user').forEach(element => {
-      const login = element.textContent.trim();
+      if (element.dataset.originalLogin !== login) {
+        element.dataset.originalLogin = login;
+      }
 
-      if (Object.prototype.hasOwnProperty.call(dict, login)) {
-        element.textContent = dict[login];
+      const name = dict[login];
+
+      // Не меняем DOM, если имя уже подставлено.
+      // Это предотвращает постоянные повторные вызовы наблюдателя.
+      if (element.textContent !== name) {
+        element.textContent = name;
       }
     });
 
-    // Убираем флаги участников.
-    table.querySelectorAll('.standings-flag').forEach(element => {
-      element.remove();
+    /*
+     * Изменения, относящиеся только к таблицам результатов.
+     * Отсутствие .standings больше не мешает замене ников.
+     */
+    document.querySelectorAll('.standings').forEach(table => {
+      const secondHeader = table.querySelector(
+        'thead tr th:nth-of-type(2), tbody tr th:nth-of-type(2)'
+      );
+
+      if (secondHeader) {
+        secondHeader.style.setProperty('width', '200px', 'important');
+        secondHeader.style.setProperty('min-width', '200px', 'important');
+      }
+
+      table.querySelectorAll('.standings-flag').forEach(element => {
+        element.remove();
+      });
     });
 
-    // Убираем ссылки изменения типа участника («to practice» и т. п.).
-    document.querySelectorAll('.change-participant-type-link').forEach(element => {
-      element.remove();
-    });
-
-    return true;
+    // Сохраняем прежнее поведение скрипта.
+    document.querySelectorAll('.change-participant-type-link')
+      .forEach(element => {
+        element.remove();
+      });
   }
 
   let scheduled = false;
@@ -195,33 +212,26 @@
 
     setTimeout(() => {
       scheduled = false;
-      applyStandingsChanges();
+      applyChanges();
     }, 100);
   }
 
   function start() {
-    console.log('[Standings helper] Скрипт загружен:', location.href);
+    console.log('[Codeforces names] Скрипт загружен:', location.href);
 
-    // Первая попытка сразу.
-    applyStandingsChanges();
+    applyChanges();
 
-    /*
-     * LMS — SPA/React-приложение: таблица или отдельные её строки
-     * могут появиться уже после загрузки документа.
-     */
-    const observer = new MutationObserver(() => {
-      scheduleApply();
-    });
+    const observer = new MutationObserver(scheduleApply);
 
     observer.observe(document.documentElement, {
       childList: true,
-      subtree: true
+      subtree: true,
+      characterData: true
     });
 
-    // Несколько дополнительных попыток на случай поздней загрузки данных.
-    setTimeout(applyStandingsChanges, 300);
-    setTimeout(applyStandingsChanges, 1000);
-    setTimeout(applyStandingsChanges, 2500);
+    setTimeout(applyChanges, 300);
+    setTimeout(applyChanges, 1000);
+    setTimeout(applyChanges, 2500);
   }
 
   if (document.readyState === 'loading') {
